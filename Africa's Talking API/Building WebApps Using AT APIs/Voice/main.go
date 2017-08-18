@@ -24,20 +24,24 @@ func login(w http.ResponseWriter, r *http.Request) {
 
         for _,phonenumbers := range formdata{
 			call(phonenumbers)
+			fmt.Println("Calling...",phonenumbers)
 		}
 		
-		fmt.Println("Calling...")
     }
 }
 
 func call(phonenumber string) {
 
 	const voiceURL string = "https://voice.africastalking.com:443/call"
+
+	// Your Africa's Talking Username
 	const username string = ""
+	// Your Africa's Talking API Key
 	const apikey string = ""
 
 	// Your Africa's Talking Virtual Number
 	var from string = ""
+
 	// Building the post
 	at := url.Values{}
 		at.Set("username", username)
@@ -82,7 +86,7 @@ func call(phonenumber string) {
 
 func main() {
     http.HandleFunc("/login", login)
-    err := http.ListenAndServe(":9090", nil) // Setting listening port accessible on http://localhost:9090/login
+    err := http.ListenAndServe(":9090", nil) // Setting listening port accessible on http://localhost:9090/makecall
     if err != nil {
         log.Fatal("ListenAndServe: ", err)
     }
